@@ -4,7 +4,8 @@ const Button =({
     label,
     outline,
     disabled = false,
-    onClick
+    onClick,
+    icon:Icon
 }) =>{
     return (
         <button
@@ -13,13 +14,16 @@ const Button =({
                 rounded-lg
                 px-3
                 py-2
-                hover:shadow-lg
+                hover:border-neutral-600
+                transition
                 ${disabled ?"cursor-not-allowed": 'cursor-pointer'}
                 ${outline ? 'bg-none' : 'bg-neutral-800'}
                 ${outline ? 'text-black' : 'text-white'}
                 ${outline ? 'border-[2px]' : 'border-none'}
             `}
-        >{label}</button>
+        >
+         {Icon && <Icon />}  
+        {label}</button>
     )
 }
 

@@ -11,6 +11,10 @@ import Button from "../Button";
 import { BiLogoAndroid } from "react-icons/bi";
 import {ImCross} from 'react-icons/im'
 import useLoginModal from "@/app/hooks/useLoginModal";
+import Header from "../Header";
+import { signIn, signOut } from "next-auth/react";
+import {AiFillGithub} from 'react-icons';
+import {FcGoogle} from 'react-icons';
 
 const RegisterModal =()=>{
     const registerModal = useRegisterModal();
@@ -26,25 +30,32 @@ const RegisterModal =()=>{
       } = useForm({
         defaultValues:{
             email:"",
-            name:"",
             password:""
         }
       })
     
       const onSubmit = (data) =>{
         setIsLoading(true);
-        axios.post('/api/register', data)
-            .then(()=>{
-                toast.success("You are register to ...")
-                router.refresh();
-                loginModal.onClose();
-            })
-            .catch(()=>{
-                toast.error("Something went wrong");
+        signIn('credentials',{
+            ...data,
+            redirect: true
+        })
+        .then((callback)=>{
+            setIsLoading(false);
 
-            }).finally(()=>{
-                setIsLoading(false)
-            })
+            if(callback.ok)
+            {
+                toast.success("Logined!");
+                router.refresh();
+                loginModal.onClose()
+            }
+
+            if(callback.error)
+            {
+                toast.error("Something went wrong !");
+            }
+        })
+           
       }
 
 
@@ -122,16 +133,51 @@ const RegisterModal =()=>{
                             py-4
                         "
                     >
+                         <Header
+                            title="LOGIN"
+                            subtitle="Login your account"
+                            center
+                        />
                         <form onSubmit={handleSubmit(onSubmit)}
                         className="flex flex-col gap-3"
                     >
                         {/* register your input into the hook by invoking the "register" function */}
                         <input defaultValue="email" {...register("email",{required:true})} type="email" placeholder="email" className="rounded-lg "/>
-                        <input defaultValue="name" {...register("name",{required:true})} type="text" placeholder="name" className="rounded-lg "/>
                         <input defaultValue="password" {...register("password",{required:true})} type="password" placeholder="password" className="rounded-lg "/>
 
                         <input type="submit" className="bg-green-600 rounded-lg px-2 py-1"/>
                      </form>
+                     <hr/>
+                     <div
+                        className="
+                            flex
+                            flex-col
+                            gap-3
+                            py-4
+                            mt-4
+                        "
+                     >
+                       <Button
+                        onClick={()=>signIn('github')}
+                        label="Github"
+                        icon={AiFillGithub}
+                        outline
+                       />
+                        <Button
+                        onClick={() => signIn('google')}
+                        label="Google"
+                        icon={FcGoogle}
+                        outline
+                       />
+            
+                        <p className=" text-center text-sm text-gray-500">
+                            Not a member?{' '}
+                        <a href="#" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+                            Start a 14 day free trial
+                        </a>
+                        </p>
+                     </div>
+                        
                     </div>
                 </div>
             </div>

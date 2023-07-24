@@ -10,6 +10,7 @@ import { useState,useEffect ,useCallback} from "react";
 import Button from "../Button";
 import { BiLogoAndroid } from "react-icons/bi";
 import {ImCross} from 'react-icons/im'
+import Header from "../Header";
 
 const RegisterModal =()=>{
     const registerModal = useRegisterModal();
@@ -121,6 +122,11 @@ const RegisterModal =()=>{
                             py-4
                         "
                     >
+                        <Header 
+                            title="REGISTER"
+                            subtitle="register your account"
+                            center
+                        />
                         <form onSubmit={handleSubmit(onSubmit)}
                         className="flex flex-col gap-3"
                     >
