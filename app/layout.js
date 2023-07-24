@@ -4,6 +4,8 @@ import Provider from './context/AuthContext'
 import ToasterContext from './context/ToasterContext'
 import Navbar from './components/navbars/Navbar'
 import Modal from './components/modals/Modal'
+import RegisterModal from './components/modals/RegisterModal'
+import LoginModal from './components/modals/LoginModal'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,7 +20,8 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <Provider>
           <ToasterContext />
-          <Modal />
+          <RegisterModal />
+        
           <Navbar />
           {children}
         </Provider>

@@ -2,7 +2,7 @@
 
 import {BiLogoAndroid} from 'react-icons/bi'
 import Button from '../Button'
-import { useCallback } from 'react'
+import { useCallback,useState,useEffect } from 'react'
 
 const Modal = (
     isOpen,
@@ -13,6 +13,8 @@ const Modal = (
     body,
     footer
 ) =>{
+
+    const [isModal,setisModal] = useState(isOpen);
 
     const handleCloseModal =useCallback(()=>{
         if(disabled){
@@ -29,6 +31,15 @@ const Modal = (
 
         onSubmit()
     },[disabled,onSubmit])
+
+    if(!isOpen)
+    {
+        return null;
+    }
+
+    useEffect(()=>{
+        setisModal(isOpen)
+    },[])
 
     return (
         <div
@@ -78,6 +89,7 @@ const Modal = (
                             >x</span>
                         </div>
                         <div>
+                            {title}
                             {body}
                         </div>
                         <div>

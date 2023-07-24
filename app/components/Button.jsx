@@ -8,6 +8,7 @@ const Button =({
 }) =>{
     return (
         <button
+            onClick={onClick}
             className={`
                 rounded-lg
                 px-3

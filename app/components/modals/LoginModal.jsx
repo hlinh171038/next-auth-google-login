@@ -10,10 +10,11 @@ import { useState,useEffect ,useCallback} from "react";
 import Button from "../Button";
 import { BiLogoAndroid } from "react-icons/bi";
 import {ImCross} from 'react-icons/im'
+import useLoginModal from "@/app/hooks/useLoginModal";
 
 const RegisterModal =()=>{
     const registerModal = useRegisterModal();
-   
+    const loginModal = useLoginModal();
     const [isLoading,setIsLoading] = useState (false);
     const router = useRouter();
   
@@ -36,7 +37,7 @@ const RegisterModal =()=>{
             .then(()=>{
                 toast.success("You are register to ...")
                 router.refresh();
-                registerModal.onClose();
+                loginModal.onClose();
             })
             .catch(()=>{
                 toast.error("Something went wrong");
@@ -52,14 +53,14 @@ const RegisterModal =()=>{
             return null;
         }
       
-       registerModal.onClose()
+       loginModal.onClose()
     }
     
     useEffect(()=>{
-        registerModal.isOpen
+        loginModal.isOpen
     },[])
     
-    if(!registerModal.isOpen)
+    if(!loginModal.isOpen)
         {
             return null;
         }
