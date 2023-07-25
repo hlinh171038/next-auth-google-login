@@ -6,6 +6,7 @@ import { useCallback, useState } from 'react'
 import useRegisterModal from '@/app/hooks/useRegisterModal'
 import useLoginModal from '@/app/hooks/useLoginModal'
 import Image from 'next/image'
+import { signOut } from 'next-auth/react'
 
 const Navbar =({
     session
@@ -22,6 +23,11 @@ const Navbar =({
         console.log(loginModal.isOpen)
         loginModal.onOpen()
     },[loginModal])
+
+
+    const handleSignOut = useCallback(()=>{
+        signOut()
+    })
     return (
         <div
             className="flex flex-row justify-between items-center bg-neutral-100 shadow-emerald-200 shadow-neutral-800"
@@ -36,23 +42,49 @@ const Navbar =({
                     py-2
                 '
             >
+                {session?.user ?(
+                    <>
+                        <Image 
+                            src={session.user.image}
+                            width={50}
+                            height={50}
+                            alt="Avatar"
+                            className='rounded-full border-[1px]'
+                        />
+                        <Button 
+                            onClick={handleSignIn}
+                            label="my Profile" 
+                        />
+                        <Button 
+                            onClick={handleSignIn}
+                            label="my Blog" 
+                        />
+                        <Button 
+                            onClick={handleSignIn}
+                            label="my Application" 
+                        />
+                        <Button 
+                        onClick={handleSignOut}
+                            label="Sign out"
+                            outline
+                        />
+                    </>
+                ):(
+                    <>
+                        <Button 
+                            onClick={handleSignIn}
+                            label="Login" 
+                        />
+                        <Button 
+                        onClick={handleSignUp}
+                            label="Sign up"
+                            outline
+                        />
+                    </>
 
-                <Image 
-                    src={session.user.image}
-                    width={50}
-                    height={50}
-                    alt="Avatar"
-                    className='rounded-full border-[1px]'
-                />
-                <Button 
-                    onClick={handleSignIn}
-                    label="Login" 
-                />
-                <Button 
-                   onClick={handleSignUp}
-                    label="Sign up"
-                    outline
-                />
+                )}
+
+                
             </div>
         </div>
     )
