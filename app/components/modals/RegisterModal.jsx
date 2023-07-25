@@ -11,6 +11,9 @@ import Button from "../Button";
 import { BiLogoAndroid } from "react-icons/bi";
 import {ImCross} from 'react-icons/im'
 import Header from "../Header";
+import {AiFillGithub} from 'react-icons';
+import {FcGoogle} from 'react-icons';
+import { signIn, signOut } from "next-auth/react";
 
 const RegisterModal =()=>{
     const registerModal = useRegisterModal();
@@ -137,6 +140,35 @@ const RegisterModal =()=>{
 
                         <input type="submit" className="bg-green-600 rounded-lg px-2 py-1"/>
                      </form>
+                     <div
+                        className="
+                            flex
+                            flex-col
+                            gap-3
+                            py-4
+                            mt-4
+                        "
+                     >
+                       <Button
+                        onClick={()=>signIn('github')}
+                        label="Github"
+                        icon={AiFillGithub}
+                        outline
+                       />
+                        <Button
+                        onClick={() => signIn('google')}
+                        label="Google"
+                        icon={FcGoogle}
+                        outline
+                       />
+            
+                        <p className=" text-center text-sm text-gray-500">
+                            Not a member?{' '}
+                        <a href="#" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+                            Start a 14 day free trial
+                        </a>
+                        </p>
+                     </div>
                     </div>
                 </div>
             </div>
