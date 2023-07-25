@@ -45,11 +45,11 @@ const Navbar =({
                 {session?.user ?(
                     <>
                         <Image 
-                            src={session.user.image}
-                            width={50}
-                            height={50}
+                             src={session?.user?.image ? session?.user?.image: '/avatar.jpg'}
+                            width={60}
+                            height={60}
                             alt="Avatar"
-                            className='rounded-full border-[1px]'
+                            className='rounded-full '
                         />
                         <Button 
                             onClick={handleSignIn}

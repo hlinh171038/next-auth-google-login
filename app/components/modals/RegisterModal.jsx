@@ -11,8 +11,8 @@ import Button from "../Button";
 import { BiLogoAndroid } from "react-icons/bi";
 import {ImCross} from 'react-icons/im'
 import Header from "../Header";
-import {AiFillGithub} from 'react-icons';
-import {FcGoogle} from 'react-icons';
+import {AiFillGithub} from 'react-icons/ai';
+import {FcGoogle} from 'react-icons/fc';
 import { signIn, signOut } from "next-auth/react";
 
 const RegisterModal =()=>{
